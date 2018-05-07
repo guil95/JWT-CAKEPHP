@@ -18,6 +18,7 @@ class UsuariosController extends AppController {
     public function initialize() {
         parent::initialize();
         $this->Auth->allow(['login']);
+$this->Auth->allow(['add']);
 
     }
 
