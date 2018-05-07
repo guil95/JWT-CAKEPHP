@@ -58,6 +58,23 @@ class UsuariosController extends AppController {
             }
         }
     }
+	
+ public function add() {
+        $usuario = $this->Usuarios->newEntity($this->request->getData());
+
+        if (!$this->Usuarios->save($usuario)) {
+            $this->response = $this->response->withStatus(400);
+            $message[] = $usuario->getValidationErrors();
+            $this->set(compact('message'));
+            $this->set('_serialize', ['message']);
+            return;
+        }
+
+        $message[] = "Usuário salvo com sucesso!";
+        $data['id'] = $usuario->id;
+        $this->set(compact('message', 'data'));
+        $this->set('_serialize', ['message', 'data']);
+    }
 
 
 }
